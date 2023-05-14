@@ -47,6 +47,20 @@ namespace XamarinHotel.View
                 (DateTime.Now.Year, DateTime.Now.Month +6, DateTime.Now.Day + 7);
         }
 
+        
+
+        private void dtpck_data_checkin_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            DatePicker elemento = (DatePicker)sender;
+
+            DateTime data_checkin = elemento.Date;
+
+
+            dtpck_data_checkout.MinimumDate = new DateTime
+                (data_checkin.Year, data_checkin.Month, data_checkin.Day + 1);
+             
+        }
+
         private async void BtnCalcular_Clicked(object sender, EventArgs e)
         {
             try
@@ -97,22 +111,11 @@ namespace XamarinHotel.View
 
                 await Navigation.PushAsync(segundaTela); //Navegando para ver o total.
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 await DisplayAlert("Ops", ex.Message, "OK");
             }
-        }
-
-        private void dtpck_data_checkin_DateSelected(object sender, DateChangedEventArgs e)
-        {
-            DatePicker elemento = (DatePicker)sender;
-
-            DateTime data_checkin = elemento.Date;
-
-
-            dtpck_data_checkout.MinimumDate = new DateTime
-                (data_checkin.Year, data_checkin.Month, data_checkin.Day + 1);
-             
         }
     }
 }

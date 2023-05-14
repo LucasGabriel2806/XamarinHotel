@@ -1,58 +1,111 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Padding="10"
              Title="{Binding Path=Quarto.Descricao}"
              x:Class="XamarinHotel.View.HospedagemCalculada">
     
     <ContentPage.Content>
-        
-        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+        <ScrollView>
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
 
-            <StackLayout Orientation="Vertical">
+                <StackLayout Orientation="Vertical">
 
-                <Label Text="Total Diária"
-                       FontSize="Title"
+                    <Label Text="Detalhes da Estadia"
+                       FontSize="40"
+                       TextColor="DarkOliveGreen"
+                       Style="{StaticResource TituloFontePersonalizada}"
                        HorizontalTextAlignment="Center"
-                       VerticalOptions="CenterAndExpand" />
+                       VerticalOptions="CenterAndExpand" 
+                       Margin="0,10,0,40" />
+
+                    <Label Text="{Binding Path=Quarto.Descricao}"
+                       FontSize="30"
+                       TextColor="DarkOliveGreen"
+                       Style="{StaticResource TituloFontePersonalizada}"
+                       HorizontalTextAlignment="Center"
+                       VerticalOptions="StartAndExpand" 
+                       Margin="0,10,0,40" />
+                </StackLayout>
+
+                <Frame BackgroundColor="DarkOliveGreen" CornerRadius="10">
+                    <StackLayout Orientation="Horizontal">
+
+                        <Label Text="Adultos:" Style="{StaticResource LabelsCampos}" />
+                        <Label Text="{Binding QuantidadeAdultos}" 
+                           Style="{StaticResource ValoresCampos}" />
+
+                        <Label Text="Crianças:" Style="{StaticResource LabelsCampos}" />
+                        <Label Text="{Binding QuantidadeCriancas}" 
+                           Style="{StaticResource ValoresCampos}" />
+
+                    </StackLayout>
+                </Frame>
+
+                <!--
+            Quanto menos linhas de códigos, mais conceituais e complexas elas são.
+            Aprenda bem os conceitos pra vc escrever menos.
+            Trabalhar mais com o intelecto e menos com os dedos-->
+                <Frame BackgroundColor="DarkOliveGreen" CornerRadius="10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label Text="Check-In:" Grid.Column="0" Grid.Row="0" />
+                        <Label Grid.Column="0" Grid.Row="1"
+                           Text="{Binding DataCheckIn, StringFormat='{}{0:dd/MM/yyyy}'}"
+                           Style="{StaticResource ValoresCampos}" />
+
+
+                        <Label Text="Check-Out:" Grid.Column="1" Grid.Row="0" />
+                        <Label Grid.Column="1" Grid.Row="1"
+                           Text="{Binding DataCheckOut, StringFormat='{}{0:dd/MM/yyyy}'}"
+                           Style="{StaticResource ValoresCampos}" />
+
+                        <Label Text="Estadia:" Grid.Column="2" Grid.Row="0" />
+                        <Label Grid.Column="2" Grid.Row="1"
+                           Text="{Binding QuantidadeDias}"
+                           Style="{StaticResource ValoresCampos}" />
+
+                    </Grid>
+                </Frame>
+
+                <!--
+            Declarei um label, que é uma formtação geral, pra todos dentro dele.
+            Span: são varios textos formatados de Maneira diferente dentro do label.
+            Dentro de cada span eu coloco as especificidades que eu quero.
+            FormattedText é uma especie de atributo do label, dentro dele
+            tem o formattedstring, onde eu coloco os spans.-->
+                <Label HorizontalOptions="CenterAndExpand"
+                   Margin="0,20,20,0"
+                   FontSize="Large">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Total Hospedagem: "
+                              TextColor="DarkOliveGreen" />
+
+                            <Span Text="{Binding ValorTotal, StringFormat='{}{0:c}'}"
+                              FontAttributes="Bold"
+                              FontSize="Title"
+                              TextColor="DarkRed"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Button Text="Voltar" Clicked="Button_Clicked" 
+                    VerticalOptions="EndAndExpand"
+                    HorizontalOptions="Fill"
+                    Margin="0,25,0,0"
+                    Style="{StaticResource BotaoVerde}"/>
             </StackLayout>
-
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Qtde Adulto:" Style="{StaticResource LabelsCampos}" />
-                <Label Text="{Binding QuantidadeAdultos}" Style="{StaticResource ValoresCampos}" />
-
-                <Label Text="Qtde Crianças:" Style="{StaticResource LabelsCampos}" />
-                <Label Text="{Binding QuantidadeCriancas}" Style="{StaticResource ValoresCampos}" />
-            </StackLayout>
-
-            <!--Path vai atras de quarto na classe da Hospedagem, que tem um tipo CategoriaQuarto,
-            que tem propriedades como Descricao(ex)-->
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Quarto:" Style="{StaticResource LabelsCampos}" />
-                <Label Text="{Binding Path=Quarto.Descricao}" Style="{StaticResource ValoresCampos}" />
-            </StackLayout>
-
-            <StackLayout Orientation="Vertical">
-                <Label Text="Check-In:"  HorizontalOptions="FillAndExpand" />
-                <Label x:Name="lblCheckIn" Text="{Binding DataCheckIn}" FontSize="Medium" FontAttributes="Bold" />
-                <Label Text="Check-Out:" HorizontalOptions="FillAndExpand" />
-                <Label x:Name="lblCheckOut" Text="{Binding DataCheckOut}" FontSize="Medium" FontAttributes="Bold" />
-                <Label Text="Qtde dias:" HorizontalOptions="FillAndExpand" />
-                <Label x:Name="lblQtde_dias" Text="{Binding QuantidadeDias}" FontSize="Medium" FontAttributes="Bold" />
-            </StackLayout>
-
-            <!--{}{0:c} é um padrão do xaml, 0 é o valor que vc quer, c é um valor de currency,
-            então ele formata automaticamente a minha string pra R$ Mudando os separadores de milhar
-            e casa decimal para o jeito certo-->
-                <StackLayout Orientation="Horizontal">
-                <Label Text="Total Hospedagem:" Style="{StaticResource LabelsCampos}" />
-                <Label Text="{Binding ValorTotal, StringFormat='{}{0:c}'}" Style="{StaticResource ValoresCampos}" />
-            </StackLayout>
-
-            <Button Text="Voltar" Clicked="Button_Clicked" />
-
-
-        </StackLayout>
-        
+        </ScrollView>
     </ContentPage.Content>
     
     

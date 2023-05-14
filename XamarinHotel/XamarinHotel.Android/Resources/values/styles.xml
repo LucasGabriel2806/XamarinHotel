@@ -1,18 +1,40 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
+	<!--Aqui posso costumizar uma infinidade de outras coisas
+	O color primary costuma aparecer em varios lugares, porque 
+	são varios contextos diferentes.
+	colorPrimary é a cor de fundo de alguns lugares-->
 
-  <style name="MainTheme" parent="MainTheme.Base">
-    <!-- As of Xamarin.Forms 4.6 the theme has moved into the Forms binary -->
-    <!-- If you want to override anything you can do that here. -->
-    <!-- Underneath are a couple of entries to get you started. -->
+	<style name="MainTheme" parent="MainTheme.Base">
+	</style>
+	<style name="MainTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
 
-    <!-- Set theme colors from https://aka.ms/material-colors -->
-    <!-- colorPrimary is used for the default action bar background -->
-    <!--<item name="colorPrimary">#2196F3</item>-->
-    <!-- colorPrimaryDark is used for the status bar -->
-    <!--<item name="colorPrimaryDark">#1976D2</item>-->
-    <!-- colorAccent is used as the default value for colorControlActivated
+		<item name="windowNoTitle">true</item>
+		<item name="windowActionBar">false</item>
+
+		<!-- As of Xamarin.Forms 4.6 the theme has moved into the Forms binary -->
+		<!-- If you want to override anything you can do that here. -->
+		<!-- Underneath are a couple of entries to get you started. -->
+
+		<!-- Set theme colors from https://aka.ms/material-colors -->
+		<!-- colorPrimary is used for the default action bar background -->
+		<item name="colorPrimary">#FF556B2F</item>
+		<!-- colorPrimaryDark is used for the status bar -->
+		<item name="colorPrimaryDark">#1976D2</item>
+		<!-- colorAccent is used as the default value for colorControlActivated
          which is used to tint widgets -->
-    <!--<item name="colorAccent">#FF4081</item>-->
-  </style>
+		<item name="colorAccent">#FF556B2F</item>
+
+		<item name="windowActionModeOverlay">true</item>
+
+		<!--Não funciona:
+		<item name="android:satePickerDialogTheme">@style/AppCompatDialogStyle</item>-->
+		
+	</style>
+	<!--DialogStyle vai ser o DatePicker, o DTP tem uma cor padrão, aqui mudamos
+	para combinar com nosso app.-->
+	
+	<style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+		<item name="colorAccent">#FF556B2F</item>
+	</style>
 </resources>
