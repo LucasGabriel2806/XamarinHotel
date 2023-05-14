@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinHotel.View.ContratacaoHospedagem"
+             Title="Minha Estadia">
+    
+    <ContentPage.Content>
+
+        <Grid x:Name="G1" RowSpacing="1" ColumnSpacing="1" Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.ColumnSpan="4"
+                   Text="Calculo Diária"
+                   FontSize="Title"
+                   HorizontalTextAlignment="Center"
+                   VerticalOptions="CenterAndExpand" />
+
+            <Image x:Name="img1" Source="montanha.jpg"
+                   Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="4"
+                   Aspect="AspectFit" />
+            
+            <!--Definição dos Labels e Stepper da quantidade de Adultos
+            BindingContext é uma ferramente do xaml muito util pra deixar
+            nossa interface mais dinamica. Ele é um recurso que avisamos
+            pro xaml que vamos buscar valores em algum lugar.
+            Ex.: No caso do style eu to mandando ele buscar um valor
+            que é um recurso statico chamado labels valores stepper.
+            No segundo label, eu to falando que o BindingContext desse
+            Label vai ser uma referencia ao um elemento chamado stepperadulto
+            que é o stepper de baixo.No text da label eu mostro o value, 
+            o valor do stepper. No BindingContext eu falo que esse label está 
+            amarrado ao stepper.
+            x:Reference aponta pra um stepper
+            -->
+            <Label Grid.Row="3" Grid.Column="0"
+                   Text="Adultos"
+                   Style="{StaticResource LabelsCampos}" />
+
+            <Label x:Name="lbl_qnt_adultos" Grid.Row="3" Grid.Column="1"
+                   BindingContext="{x:Reference stepperAdulto}"
+                   Text="{Binding Value}"
+                   Style="{StaticResource LabelsValoresStepper}" />
+
+            <Stepper x:Name="stepperAdulto" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"
+                     Minimum="0" Maximum="10" Increment="1" />
+            
+            <!--Definição dos labels e stepper da quantidade de crianças-->
+
+            <Label Grid.Row="4" Grid.Column="0"
+                   Text="Crianças"
+                   Style="{StaticResource LabelsCampos}" />
+
+            <Label x:Name="lbl_qnt_criancas" Grid.Row="4" Grid.Column="1"
+                   BindingContext="{x:Reference stepperCrianca}"
+                   Text="{Binding Value}"
+                   Style="{StaticResource LabelsValoresStepper}" />
+
+            <Stepper x:Name="stepperCrianca" 
+                     Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2"
+                     Minimum="0" 
+                     Maximum="5" 
+                     Increment="1" />
+
+            <!--Definição da lista "dinâmica de tipos quartos disponíveis"
+            Picker: caixa suspensa, combobox. Vc aperta a oppção e ele te dá 
+            pra selecionar-->
+            <Picker x:Name="pck_quarto" Grid.Row="5" Grid.ColumnSpan="4"
+                    Title="Selecione o Quarto"
+                    ItemDisplayBinding="{Binding Descricao}">
+            </Picker>
+
+            <!--Definição das Datas de Entrada (ChekIn) e Saída (CheckOut)-->
+            <Label Grid.Row="6" Grid.Column="0"
+                   Text="Check-In:"
+                   Style="{StaticResource LabelsCampos }" />
+    
+            <!--DatePicker é onde eu seleciono as datas
+            DateSelected: conforme eu mudo a seleção do checkin, eu posso manipular 
+            algum evento-->
+            <DatePicker x:Name="dtpck_data_checkin" Grid.Row="6" Grid.ColumnSpan="3"
+                        DateSelected="dtpck_data_checkin_DateSelected"
+                        Grid.Column="1" Format="dd/MM/yyyy" />
+
+            <Label Grid.Row="7" Grid.Column="0"
+                   Text="Check-Out:"
+                   Style="{StaticResource LabelsCampos}" />
+
+            <DatePicker x:Name="dtpck_data_checkout" Grid.Row="7" Grid.ColumnSpan="3"
+                        Grid.Column="1" Format="dd/MM/yyyy" />
+
+            <!--Botão que chama o métdo que faz o cálculo-->
+            <Button Grid.Row="9" Grid.ColumnSpan="4"
+                    Text="Calcular Minha Estadia"
+                    x:Name="BtnCalcular"
+                    Clicked="BtnCalcular_Clicked" />
+
+        </Grid>
+
+    </ContentPage.Content>
+    
+</ContentPage>

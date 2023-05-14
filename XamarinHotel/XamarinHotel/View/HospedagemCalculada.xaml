@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="{Binding Path=Quarto.Descricao}"
+             x:Class="XamarinHotel.View.HospedagemCalculada">
+    
+    <ContentPage.Content>
+        
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+
+            <StackLayout Orientation="Vertical">
+
+                <Label Text="Total Diária"
+                       FontSize="Title"
+                       HorizontalTextAlignment="Center"
+                       VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Qtde Adulto:" Style="{StaticResource LabelsCampos}" />
+                <Label Text="{Binding QuantidadeAdultos}" Style="{StaticResource ValoresCampos}" />
+
+                <Label Text="Qtde Crianças:" Style="{StaticResource LabelsCampos}" />
+                <Label Text="{Binding QuantidadeCriancas}" Style="{StaticResource ValoresCampos}" />
+            </StackLayout>
+
+            <!--Path vai atras de quarto na classe da Hospedagem, que tem um tipo CategoriaQuarto,
+            que tem propriedades como Descricao(ex)-->
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Quarto:" Style="{StaticResource LabelsCampos}" />
+                <Label Text="{Binding Path=Quarto.Descricao}" Style="{StaticResource ValoresCampos}" />
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                <Label Text="Check-In:"  HorizontalOptions="FillAndExpand" />
+                <Label x:Name="lblCheckIn" Text="{Binding DataCheckIn}" FontSize="Medium" FontAttributes="Bold" />
+                <Label Text="Check-Out:" HorizontalOptions="FillAndExpand" />
+                <Label x:Name="lblCheckOut" Text="{Binding DataCheckOut}" FontSize="Medium" FontAttributes="Bold" />
+                <Label Text="Qtde dias:" HorizontalOptions="FillAndExpand" />
+                <Label x:Name="lblQtde_dias" Text="{Binding QuantidadeDias}" FontSize="Medium" FontAttributes="Bold" />
+            </StackLayout>
+
+            <!--{}{0:c} é um padrão do xaml, 0 é o valor que vc quer, c é um valor de currency,
+            então ele formata automaticamente a minha string pra R$ Mudando os separadores de milhar
+            e casa decimal para o jeito certo-->
+                <StackLayout Orientation="Horizontal">
+                <Label Text="Total Hospedagem:" Style="{StaticResource LabelsCampos}" />
+                <Label Text="{Binding ValorTotal, StringFormat='{}{0:c}'}" Style="{StaticResource ValoresCampos}" />
+            </StackLayout>
+
+            <Button Text="Voltar" Clicked="Button_Clicked" />
+
+
+        </StackLayout>
+        
+    </ContentPage.Content>
+    
+    
+</ContentPage>
