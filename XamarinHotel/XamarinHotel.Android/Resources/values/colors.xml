@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Nesse arquivo definimos algumas cores padrão do sistema
+launcher_background:são cores do funcionamento do android,
+geralmente são cores da splash_screen e do icone.
+colorAccent: cor de enfase-->
 <resources>
-    <color name="launcher_background">#FFFFFF</color>
+    <color name="launcher_background">#FF556B2F</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#FF556B2F</color>
 </resources>
